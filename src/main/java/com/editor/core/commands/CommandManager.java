@@ -1,10 +1,13 @@
-package com.editor.command;
+package com.editor.core.commands;
 
-import java.util.*;
+import java.util.Stack;
 
+/**
+ * Gère l'exécution et l'annulation des commandes.
+ */
 public class CommandManager {
-    private Stack<Command> undoStack = new Stack<>();
-    private Stack<Command> redoStack = new Stack<>();
+    private final Stack<Command> undoStack = new Stack<>();
+    private final Stack<Command> redoStack = new Stack<>();
 
     public void executeCommand(Command cmd) {
         cmd.execute();
@@ -26,5 +29,13 @@ public class CommandManager {
             cmd.execute();
             undoStack.push(cmd);
         }
+    }
+
+    public boolean canUndo() {
+        return !undoStack.isEmpty();
+    }
+
+    public boolean canRedo() {
+        return !redoStack.isEmpty();
     }
 }
