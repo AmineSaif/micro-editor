@@ -43,53 +43,20 @@ public class Main {
         // Trash zone
         TrashZone trashZone = new TrashZone(commandManager, whiteBoard, toolbar);
 
-        // === Menu Save / Load ===
-        JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem saveItem = new JMenuItem("Save");
-        JMenuItem loadItem = new JMenuItem("Load");
-
-        saveItem.addActionListener(e -> {
-            JFileChooser chooser = new JFileChooser();
-            if (chooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
-                originator.setState(whiteBoard.getFigures());
-                try {
-                    SaveManager.save(chooser.getSelectedFile().getAbsolutePath(), originator.saveToMemento());
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(frame, "Erreur lors de la sauvegarde");
-                }
-            }
-        });
-
-        loadItem.addActionListener(e -> {
-            JFileChooser chooser = new JFileChooser();
-            if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
-                try {
-                    Memento memento = (Memento) SaveManager.load(chooser.getSelectedFile().getAbsolutePath());
-                    originator.restoreFromMemento(memento);
-                    whiteBoard.setFigures(originator.getState());
-                } catch (IOException | ClassNotFoundException ex) {
-                    JOptionPane.showMessageDialog(frame, "Erreur lors du chargement");
-                }
-            }
-        });
-
-        fileMenu.add(saveItem);
-        fileMenu.add(loadItem);
-        menuBar.add(fileMenu);
-        frame.setJMenuBar(menuBar);
-
         // === Barre supérieure (Undo/Redo/Group) ===
         JPanel topMenu = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton undoBtn = new JButton("Undo");
         JButton redoBtn = new JButton("Redo");
         JButton groupBtn = new JButton("Group");
         JButton ungroupBtn = new JButton("Ungroup");
+        JButton saveBtn = new JButton("Save");
+        JButton loadBtn = new JButton("Load");
 
         undoBtn.addActionListener(e -> {
             if (commandManager.canUndo()) {
                 commandManager.undo();
                 whiteBoard.repaint();
+                toolbar.repaint(); // 🔁 n'oublie pas ce repaint !
             }
         });
 
@@ -116,10 +83,37 @@ public class Main {
             }
         });
 
+        saveBtn.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            if (chooser.showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+                originator.setState(whiteBoard.getFigures());
+                try {
+                    SaveManager.save(chooser.getSelectedFile().getAbsolutePath(), originator.saveToMemento());
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(frame, "Erreur lors de la sauvegarde");
+                }
+            }
+        });
+
+        loadBtn.addActionListener(e -> {
+            JFileChooser chooser = new JFileChooser();
+            if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+                try {
+                    Memento memento = (Memento) SaveManager.load(chooser.getSelectedFile().getAbsolutePath());
+                    originator.restoreFromMemento(memento);
+                    whiteBoard.setFigures(originator.getState());
+                } catch (IOException | ClassNotFoundException ex) {
+                    JOptionPane.showMessageDialog(frame, "Erreur lors du chargement");
+                }
+            }
+        });
+
         topMenu.add(undoBtn);
         topMenu.add(redoBtn);
         topMenu.add(groupBtn);
         topMenu.add(ungroupBtn);
+        topMenu.add(saveBtn);
+        topMenu.add(loadBtn);
 
         // === Panel latéral (Toolbar + Trash) ===
         JPanel leftPanel = new JPanel(new BorderLayout());

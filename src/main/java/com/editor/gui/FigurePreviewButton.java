@@ -35,7 +35,7 @@ public class FigurePreviewButton extends JComponent {
 
         // 🔲 Fond blanc et bordure grise
         g2.setColor(Color.WHITE);
-        g2.setColor(new Color(245, 245, 245)); // fond gris clair
+        g2.setColor(Color.GRAY); // fond gris clair
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 10, 10);
         g2.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
 
