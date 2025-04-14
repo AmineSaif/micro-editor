@@ -1,24 +1,3 @@
-Le dépôt Git est maintenant ouvert. Je vais analyser tous les fichiers sources pour te générer un `README.md` complet et professionnel adapté à ton projet **Micro Editor**.
-
----
-
-### 🔍 Analyse en cours…
-
-Je parcours le dépôt pour :
-
-- Identifier la structure du code (`src/`)
-- Lire les classes principales (éditeur, formes, commandes, GUI…)
-- Détecter les design patterns utilisés (Command, Composite, Prototype…)
-- Comprendre le fonctionnement : glisser-déposer, undo/redo, sauvegarde/chargement, etc.
-
----
-
-Je reviens avec un `README.md` rédigé sur mesure dans quelques instants.
-
-Voici un `README.md` complet et professionnel pour ton projet **Micro Editor**, basé sur l'analyse du dépôt [AmineSaif/micro-editor](https://github.com/AmineSaif/micro-editor.git) :
-
----
-
 # Micro Editor
 
 Micro Editor est une application Java orientée objet qui permet de créer, manipuler et gérer des formes géométriques simples (rectangles, cercles, lignes, etc.) via une interface graphique intuitive. Elle intègre des fonctionnalités avancées telles que l'annulation/rétablissement des actions (undo/redo), la sérialisation des formes, et une architecture modulaire basée sur des design patterns éprouvés.
@@ -101,7 +80,3 @@ mvn test```
 ## 🤝 Contribuer
 
 Les contributions sont les bienveues ! Veuillez soumettre une *issue* ou une *pull request* pour proposer des améliorations ou signaler des prolèmes.
-
----
-
-Si tu souhaites que je t'aide à rédiger un `README.md` en anglais ou à créer une documentation technique plus détaillée (par exemple, un diagramme UML ou une description des cas d'utilisation), n'hésite pas à me le demander ! 
